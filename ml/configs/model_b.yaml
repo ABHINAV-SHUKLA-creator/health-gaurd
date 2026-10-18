@@ -1,0 +1,5 @@
+name: model_b
+data: data/processed/brfss_heart.csv
+target: target
+seed: 42
+cv_folds: 5

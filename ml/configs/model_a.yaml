@@ -1,0 +1,6 @@
+name: model_a
+data: data/processed/uci_heart.csv
+target: target
+group_column: site
+seed: 42
+cv_folds: 5
