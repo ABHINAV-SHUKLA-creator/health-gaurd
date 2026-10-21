@@ -1,0 +1,13 @@
+features,flags,model,cv_auc,auc_cleveland,auc_hungarian,auc_switzerland,auc_va,loso_mean
+full13,on,logreg,0.902,0.888,0.903,0.725,0.715,0.808
+full13,on,xgboost,0.891,0.875,0.872,0.749,0.71,0.801
+full13,off,logreg,0.883,0.849,0.894,0.747,0.724,0.803
+full13,off,xgboost,0.886,0.843,0.858,0.768,0.698,0.792
+no_ca_thal,on,logreg,0.893,0.864,0.892,0.758,0.697,0.803
+no_ca_thal,on,xgboost,0.884,0.869,0.865,0.746,0.706,0.796
+no_ca_thal,off,logreg,0.877,0.857,0.893,0.746,0.748,0.811
+no_ca_thal,off,xgboost,0.875,0.855,0.866,0.75,0.71,0.795
+checkup7,on,logreg,0.881,0.836,0.873,0.783,0.756,0.812
+checkup7,on,xgboost,0.876,0.823,0.858,0.8,0.739,0.805
+checkup7,off,logreg,0.866,0.842,0.882,0.785,0.75,0.815
+checkup7,off,xgboost,0.872,0.819,0.861,0.791,0.738,0.802

@@ -1,0 +1,64 @@
+{
+  "model": "logistic_regression_calibrated_sigmoid",
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "exang"
+  ],
+  "C": 0.1,
+  "n_rows": 920,
+  "pooled_cv_auc_mean": 0.866,
+  "pooled_cv_auc_std": 0.016,
+  "held_out_pooled": {
+    "auc": 0.84,
+    "brier_raw": 0.162,
+    "brier_cal": 0.162
+  },
+  "per_hospital": [
+    {
+      "hospital": "cleveland",
+      "n": 303,
+      "observed_rate": 0.459,
+      "mean_pred_raw": 0.562,
+      "mean_pred_cal": 0.576,
+      "auc": 0.847,
+      "brier_raw": 0.173,
+      "brier_cal": 0.178
+    },
+    {
+      "hospital": "hungarian",
+      "n": 294,
+      "observed_rate": 0.361,
+      "mean_pred_raw": 0.48,
+      "mean_pred_cal": 0.472,
+      "auc": 0.882,
+      "brier_raw": 0.148,
+      "brier_cal": 0.145
+    },
+    {
+      "hospital": "switzerland",
+      "n": 123,
+      "observed_rate": 0.935,
+      "mean_pred_raw": 0.637,
+      "mean_pred_cal": 0.652,
+      "auc": 0.783,
+      "brier_raw": 0.167,
+      "brier_cal": 0.159
+    },
+    {
+      "hospital": "va",
+      "n": 200,
+      "observed_rate": 0.745,
+      "mean_pred_raw": 0.692,
+      "mean_pred_cal": 0.707,
+      "auc": 0.752,
+      "brier_raw": 0.164,
+      "brier_cal": 0.164
+    }
+  ],
+  "trained_at": "2026-10-21T07:06:25+00:00"
+}

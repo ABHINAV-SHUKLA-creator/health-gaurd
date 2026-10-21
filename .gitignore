@@ -15,3 +15,6 @@ dist/
 
 .DS_Store
 Thumbs.db
+
+//It lists each feature’s weight, strongest first. A positive number pushes risk up and a negative one pushes it down
+//python -c "import joblib; e=joblib.load('artifacts/model_a/v1/explainer.joblib'); clf=e['pipeline'].named_steps['clf']; [print(f'{n:20s} {c:+.3f}') for n,c in sorted(zip(e['feature_names'], clf.coef_[0]), key=lambda t:-abs(t[1]))]"

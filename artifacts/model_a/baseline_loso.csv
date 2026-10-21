@@ -1,0 +1,13 @@
+model,held_out,n_test,disease_rate,auc,accuracy,brier
+logreg,cleveland,303,0.459,0.888,0.785,0.155
+logreg,hungarian,294,0.361,0.903,0.83,0.13
+logreg,switzerland,123,0.935,0.725,0.789,0.154
+logreg,va,200,0.745,0.715,0.73,0.181
+random_forest,cleveland,303,0.459,0.869,0.716,0.188
+random_forest,hungarian,294,0.361,0.881,0.765,0.176
+random_forest,switzerland,123,0.935,0.747,0.74,0.171
+random_forest,va,200,0.745,0.721,0.665,0.198
+xgboost,cleveland,303,0.459,0.875,0.792,0.152
+xgboost,hungarian,294,0.361,0.872,0.772,0.154
+xgboost,switzerland,123,0.935,0.749,0.715,0.185
+xgboost,va,200,0.745,0.71,0.69,0.216
