@@ -40,3 +40,4 @@ class ClinicalResult(BaseModel):
     contributions: list[Contribution]
     model_version: str
     disclaimer: str
+    notes: list[str] = Field(default_factory=list, description="Cautions about this result")

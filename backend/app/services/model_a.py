@@ -10,6 +10,8 @@ from app.core import config
 from app.schemas.clinical import ClinicalInput
 
 FEATURES = ["age", "sex", "cp", "trestbps", "chol", "fbs", "exang"]
+# Ages the training patients cover (approximately); outside it the model extrapolates.
+AGE_RANGE = (28, 77)
 SEX = {"female": 0, "male": 1}
 CHEST_PAIN = {"typical_angina": 1, "atypical_angina": 2,
               "non_anginal": 3, "asymptomatic": 4}
@@ -79,6 +81,21 @@ class ModelA:
         ]
         return sorted(items, key=lambda i: abs(i["effect"]), reverse=True)
 
+    @staticmethod
+    def notes(inp):
+        notes = []
+        low, high = AGE_RANGE
+        if not low <= inp.age <= high:
+            notes.append(
+                f"Your age is outside the range of the patients this model learned from "
+                f"(about {low} to {high}), so this result is much less reliable.")
+        if inp.chest_pain == "asymptomatic":
+            notes.append(
+                "In this dataset, patients with no chest pain symptoms were often the ones "
+                "with confirmed disease because of how patients were selected, so this "
+                "answer raises the score here. It is a pattern in the data, not a medical rule.")
+        return notes
+
     def predict(self, inp: ClinicalInput):
         frame = self.to_frame(inp)
         score = float(self.model.predict_proba(frame)[0, 1])
@@ -88,6 +105,7 @@ class ModelA:
             "contributions": self.contributions(frame, inp),
             "model_version": config.MODEL_A_VERSION,
             "disclaimer": config.DISCLAIMER,
+            "notes": self.notes(inp),
         }
 
 

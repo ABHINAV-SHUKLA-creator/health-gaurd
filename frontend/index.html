@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthGuard - explainable heart-disease risk screening (educational)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>HealthGuard</h1>
+    <p>Explainable heart-disease risk screening. Two models, and every result comes with its reasons.</p>
+  </header>
+
+  <div class="banner" role="note">
+    <strong>Educational project.</strong> Not a medical device and not medical advice.
+    If you have symptoms such as chest pain, shortness of breath or fainting,
+    contact a doctor or emergency services.
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Choose a check">
+    <button role="tab" id="tab-clinical" aria-controls="panel-clinical" aria-selected="true" data-tab="clinical">Clinical check</button>
+    <button role="tab" id="tab-lifestyle" aria-controls="panel-lifestyle" aria-selected="false" data-tab="lifestyle">Lifestyle check</button>
+    <button role="tab" id="tab-about" aria-controls="panel-about" aria-selected="false" data-tab="about">About the models</button>
+  </nav>
+
+  <main>
+    <!-- ============ CLINICAL ============ -->
+    <section id="panel-clinical" role="tabpanel" aria-labelledby="tab-clinical">
+      <h2>Clinical check</h2>
+      <p class="intro">Seven answers you could get from a recent checkup. Trained on about 920 patients
+        from four hospitals (UCI Heart Disease data).</p>
+      <form id="form-clinical" novalidate>
+        <div class="grid">
+          <label>Age (years)
+            <input name="age" type="number" min="18" max="100" required>
+          </label>
+          <label>Sex
+            <select name="sex" required>
+              <option value="">Select...</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </label>
+          <label class="wide">Chest pain type
+            <select name="chest_pain" required>
+              <option value="">Select...</option>
+              <option value="typical_angina">Typical angina (pain on exertion, eased by rest)</option>
+              <option value="atypical_angina">Atypical angina</option>
+              <option value="non_anginal">Non-anginal pain</option>
+              <option value="asymptomatic">No chest pain symptoms (asymptomatic)</option>
+            </select>
+            <small>In this dataset, patients with no chest pain symptoms were often the ones with confirmed
+              disease, so this answer can raise the score. That is a pattern in the data, not a medical rule.</small>
+          </label>
+          <label>Resting blood pressure (mmHg)
+            <input name="resting_bp" type="number" min="80" max="250" required>
+          </label>
+          <label>Cholesterol (mg/dL)
+            <input name="cholesterol" type="number" min="100" max="600" required>
+          </label>
+          <label>Fasting blood sugar over 120 mg/dL?
+            <select name="fasting_blood_sugar_over_120" required>
+              <option value="">Select...</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+          <label>Chest pain brought on by exercise?
+            <select name="exercise_angina" required>
+              <option value="">Select...</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit" class="primary">Get result</button>
+      </form>
+      <div id="result-clinical" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ LIFESTYLE ============ -->
+    <section id="panel-lifestyle" role="tabpanel" aria-labelledby="tab-lifestyle" hidden>
+      <h2>Lifestyle check</h2>
+      <p class="intro">Eight answers about you and your health history. Trained on about 230,000
+        US survey responses (BRFSS 2015).</p>
+      <form id="form-lifestyle" novalidate>
+        <div class="grid">
+          <label>Age (years)
+            <input name="age" type="number" min="18" max="100" required>
+          </label>
+          <label>Sex
+            <select name="sex" required>
+              <option value="">Select...</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </label>
+          <label>Height (cm)
+            <input name="height_cm" type="number" min="120" max="230" required>
+          </label>
+          <label>Weight (kg)
+            <input name="weight_kg" type="number" min="30" max="300" step="0.1" required>
+          </label>
+          <label>Smoked at least 100 cigarettes in your life?
+            <select name="smoked_100_cigarettes" required>
+              <option value="">Select...</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+          <label>Any physical activity in the past 30 days (outside work)?
+            <select name="physically_active" required>
+              <option value="">Select...</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </label>
+          <label>Ever told you have high blood pressure?
+            <select name="high_blood_pressure" required>
+              <option value="">Select...</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+          <label>Ever told you have high cholesterol?
+            <select name="high_cholesterol" required>
+              <option value="">Select...</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+          <label>Diabetes
+            <select name="diabetes" required>
+              <option value="">Select...</option>
+              <option value="no">No</option>
+              <option value="prediabetes">Prediabetes</option>
+              <option value="diabetes">Diabetes</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit" class="primary">Get result</button>
+      </form>
+      <div id="result-lifestyle" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="panel-about" role="tabpanel" aria-labelledby="tab-about" hidden>
+      <h2>About the models</h2>
+      <p class="intro">These figures are read live from the trained models' saved evaluation files.</p>
+      <div id="about-models" aria-live="polite">Loading...</div>
+
+      <h3>How to read a result</h3>
+      <ul class="plain">
+        <li>The coloured band is a rough grouping, not a diagnosis.</li>
+        <li>The bars show how much each of your answers moved the score up or down compared with an
+          average person in the training data.</li>
+        <li><strong>Clinical check:</strong> the score is relative to patients referred to four hospitals,
+          where disease rates ranged from about 36% to 93%. It is not your absolute chance of disease.</li>
+        <li><strong>Lifestyle check:</strong> the percentage describes survey respondents like you who
+          <em>reported ever having</em> heart disease or a heart attack. It does not predict your future risk.</li>
+      </ul>
+
+      <h3>Limitations</h3>
+      <ul class="plain">
+        <li>Small, old and narrow data: the clinical data is from the 1980s and about 920 patients;
+          the lifestyle data is US self-reported survey data from 2015.</li>
+        <li>Neither model has been tested on people outside these datasets.</li>
+        <li>Fewer than a handful of non-disease patients exist at one hospital (Switzerland),
+          so results there are unstable.</li>
+        <li>Self-reported answers can be wrong, and the model cannot see anything you do not enter.</li>
+        <li>Not validated for any real medical decision.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built as a learning project with scikit-learn, SHAP and FastAPI.
+      Data: UCI Heart Disease (CC BY 4.0) and CDC BRFSS 2015 (via Kaggle).</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

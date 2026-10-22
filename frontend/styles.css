@@ -1,0 +1,65 @@
+:root {
+  --bg: #f6f8fa; --card: #ffffff; --text: #1f2933; --muted: #5b6770;
+  --border: #d5dde3; --accent: #1d5fd6; --accent-text: #ffffff;
+  --lower: #1b7f4b; --moderate: #b36b00; --higher: #b3261e;
+  --raise: #b3261e; --lower-bar: #1b7f4b; --banner: #fff4d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12171c; --card: #1a2128; --text: #e6ebef; --muted: #9aa7b1;
+    --border: #2d3944; --accent: #5b9bff; --accent-text: #0b1117;
+    --lower: #4cc38a; --moderate: #f0a93b; --higher: #ff7b72;
+    --raise: #ff7b72; --lower-bar: #4cc38a; --banner: #3a3015;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.site-header { padding: 28px 20px 8px; max-width: 860px; margin: 0 auto; }
+.site-header h1 { margin: 0; font-size: 2rem; }
+.site-header p { margin: 4px 0 0; color: var(--muted); }
+.banner { max-width: 860px; margin: 12px auto; padding: 10px 14px; background: var(--banner);
+  border: 1px solid var(--border); border-radius: 8px; font-size: .92rem; width: calc(100% - 40px); }
+.tabs { display: flex; gap: 6px; max-width: 860px; margin: 16px auto 0; padding: 0 20px; flex-wrap: wrap; }
+.tabs button { padding: 10px 16px; border: 1px solid var(--border); background: var(--card);
+  color: var(--text); border-radius: 8px 8px 0 0; cursor: pointer; font: inherit; }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+main { max-width: 860px; margin: 0 auto; padding: 0 20px 40px; }
+section { background: var(--card); border: 1px solid var(--border); border-radius: 0 8px 8px 8px;
+  padding: 20px; }
+h2 { margin-top: 0; }
+.intro { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.grid .wide { grid-column: 1 / -1; }
+label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: .95rem; }
+label small { font-weight: 400; color: var(--muted); }
+input, select { padding: 9px 10px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg); color: var(--text); font: inherit; }
+input:focus, select:focus, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+button.primary { padding: 11px 22px; background: var(--accent); color: var(--accent-text);
+  border: 0; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
+button.primary:disabled { opacity: .6; cursor: wait; }
+.result { margin-top: 20px; }
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.badge { display: inline-block; padding: 4px 14px; border-radius: 999px; font-weight: 700;
+  border: 2px solid currentColor; }
+.badge.lower { color: var(--lower); } .badge.moderate { color: var(--moderate); }
+.badge.higher { color: var(--higher); }
+.error { border: 1px solid var(--higher); color: var(--higher); border-radius: 8px; padding: 10px 14px; }
+.contribs { list-style: none; padding: 0; margin: 12px 0; }
+.contribs li { display: grid; grid-template-columns: minmax(150px, 1.2fr) 2fr; gap: 10px; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid var(--border); }
+.contribs .name small { display: block; color: var(--muted); font-weight: 400; }
+.track { background: var(--bg); border-radius: 6px; height: 14px; overflow: hidden; }
+.fill { height: 100%; border-radius: 6px; }
+.fill.raises { background: var(--raise); } .fill.lowers { background: var(--lower-bar); }
+.dir { font-size: .85rem; color: var(--muted); margin-top: 2px; }
+.note { border: 1px solid var(--moderate); border-radius: 8px; padding: 8px 14px; margin: 12px 0; }
+.note p { margin: 6px 0 0; font-size: .92rem; }
+.fineprint { color: var(--muted); font-size: .85rem; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: 8px 0 16px; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; white-space: nowrap; }
+th { background: var(--bg); }
+.plain { padding-left: 20px; }
+footer { max-width: 860px; margin: 0 auto; padding: 0 20px 30px; color: var(--muted); font-size: .85rem; }
+@media (max-width: 560px) { .contribs li { grid-template-columns: 1fr; } }
