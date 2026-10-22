@@ -33,7 +33,7 @@ OUT = ROOT / "artifacts" / "model_b" / "v1"
 
 FEATURES = [
     "HighBP", "HighChol", "BMI", "Smoker", "Diabetes", "PhysActivity",
-    "Fruits", "Veggies", "HvyAlcoholConsump", "Sex", "Age",
+    "Sex", "Age",
 ]
 # Age is stored as 13 five-year categories: 1 = 18-24, 2 = 25-29, ... 13 = 80+
 AGE_GROUPS = {"18-39": (1, 4), "40-59": (5, 8), "60-74": (9, 11), "75+": (12, 13)}

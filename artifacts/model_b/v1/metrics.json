@@ -7,30 +7,27 @@
     "Smoker",
     "Diabetes",
     "PhysActivity",
-    "Fruits",
-    "Veggies",
-    "HvyAlcoholConsump",
     "Sex",
     "Age"
   ],
   "n_rows": 229781,
   "disease_rate": 0.103,
-  "cv_auc_mean": 0.797,
+  "cv_auc_mean": 0.796,
   "cv_auc_std": 0.003,
   "holdout": {
     "raw": {
       "n": 45957,
       "positives": 4743,
-      "auc": 0.798,
-      "avg_precision": 0.291,
-      "brier": 0.0819
+      "auc": 0.796,
+      "avg_precision": 0.289,
+      "brier": 0.082
     },
     "calibrated": {
       "n": 45957,
       "positives": 4743,
-      "auc": 0.798,
-      "avg_precision": 0.291,
-      "brier": 0.0819
+      "auc": 0.796,
+      "avg_precision": 0.289,
+      "brier": 0.082
     }
   },
   "subgroups": [
@@ -38,49 +35,49 @@
       "group": "sex=0",
       "n": 25718,
       "positives": 2039,
-      "auc": 0.787,
-      "avg_precision": 0.222,
-      "brier": 0.0668
+      "auc": 0.785,
+      "avg_precision": 0.22,
+      "brier": 0.0669
     },
     {
       "group": "sex=1",
       "n": 20239,
       "positives": 2704,
-      "auc": 0.791,
-      "avg_precision": 0.333,
-      "brier": 0.1011
+      "auc": 0.79,
+      "avg_precision": 0.33,
+      "brier": 0.1013
     },
     {
       "group": "age 18-39",
       "n": 6930,
       "positives": 68,
-      "auc": 0.719,
-      "avg_precision": 0.051,
+      "auc": 0.725,
+      "avg_precision": 0.048,
       "brier": 0.0096
     },
     {
       "group": "age 40-59",
       "n": 16465,
       "positives": 942,
-      "auc": 0.761,
-      "avg_precision": 0.166,
+      "auc": 0.759,
+      "avg_precision": 0.165,
       "brier": 0.0508
     },
     {
       "group": "age 60-74",
       "n": 16206,
       "positives": 2311,
-      "auc": 0.727,
-      "avg_precision": 0.29,
-      "brier": 0.1124
+      "auc": 0.724,
+      "avg_precision": 0.288,
+      "brier": 0.1126
     },
     {
       "group": "age 75+",
       "n": 6356,
       "positives": 1422,
-      "auc": 0.672,
-      "avg_precision": 0.354,
-      "brier": 0.1636
+      "auc": 0.67,
+      "avg_precision": 0.351,
+      "brier": 0.1639
     }
   ],
   "candidate_bands": {
@@ -91,23 +88,23 @@
     "table": [
       {
         "band": "lower",
-        "n": 19659,
-        "observed_rate": 0.018,
+        "n": 19653,
+        "observed_rate": 0.019,
         "share_of_people": 0.428
       },
       {
         "band": "moderate",
-        "n": 14950,
+        "n": 14967,
         "observed_rate": 0.095,
-        "share_of_people": 0.325
+        "share_of_people": 0.326
       },
       {
         "band": "higher",
-        "n": 11348,
-        "observed_rate": 0.261,
+        "n": 11337,
+        "observed_rate": 0.26,
         "share_of_people": 0.247
       }
     ]
   },
-  "trained_at": "2026-10-21T08:08:01+00:00"
+  "trained_at": "2026-10-22T14:19:23+00:00"
 }
