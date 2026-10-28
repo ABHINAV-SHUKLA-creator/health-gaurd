@@ -21,6 +21,8 @@
   <nav class="tabs" role="tablist" aria-label="Choose a check">
     <button role="tab" id="tab-clinical" aria-controls="panel-clinical" aria-selected="true" data-tab="clinical">Clinical check</button>
     <button role="tab" id="tab-lifestyle" aria-controls="panel-lifestyle" aria-selected="false" data-tab="lifestyle">Lifestyle check</button>
+    <button role="tab" id="tab-explorer" aria-controls="panel-explorer" aria-selected="false" data-tab="explorer">Dataset explorer</button>
+    <button role="tab" id="tab-lab" aria-controls="panel-lab" aria-selected="false" data-tab="lab">Model lab</button>
     <button role="tab" id="tab-about" aria-controls="panel-about" aria-selected="false" data-tab="about">About the models</button>
   </nav>
 
@@ -50,8 +52,7 @@
               <option value="non_anginal">Non-anginal pain</option>
               <option value="asymptomatic">No chest pain symptoms (asymptomatic)</option>
             </select>
-            <small>In this dataset, patients with no chest pain symptoms were often the ones with confirmed
-              disease, so this answer can raise the score. That is a pattern in the data, not a medical rule.</small>
+            <small>Choose the option that best describes any chest pain you have had.</small>
           </label>
           <label>Resting blood pressure (mmHg)
             <input name="resting_bp" type="number" min="80" max="250" required>
@@ -74,7 +75,11 @@
             </select>
           </label>
         </div>
-        <button type="submit" class="primary">Get result</button>
+        <div class="actions">
+          <button type="submit" class="primary">Get result</button>
+          <button type="button" class="secondary" data-example="high">Try a higher-risk example</button>
+          <button type="button" class="secondary" data-example="low">Try a lower-risk example</button>
+        </div>
       </form>
       <div id="result-clinical" class="result" aria-live="polite"></div>
     </section>
@@ -139,9 +144,28 @@
             </select>
           </label>
         </div>
-        <button type="submit" class="primary">Get result</button>
+        <div class="actions">
+          <button type="submit" class="primary">Get result</button>
+          <button type="button" class="secondary" data-example="high">Try a higher-risk example</button>
+          <button type="button" class="secondary" data-example="low">Try a lower-risk example</button>
+        </div>
       </form>
       <div id="result-lifestyle" class="result" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ DATASET EXPLORER ============ -->
+    <section id="panel-explorer" role="tabpanel" aria-labelledby="tab-explorer" hidden>
+      <h2>Dataset explorer</h2>
+      <p class="intro">What the models learned from. Rates are the share of people with heart disease
+        (clinical data) or who reported it (survey data).</p>
+      <div id="explorer-content" aria-live="polite">Loading...</div>
+    </section>
+
+    <!-- ============ MODEL LAB ============ -->
+    <section id="panel-lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
+      <h2>Model lab</h2>
+      <p class="intro">How the models were compared and tested, including on data they never saw.</p>
+      <div id="lab-content" aria-live="polite">Loading...</div>
     </section>
 
     <!-- ============ ABOUT ============ -->
@@ -152,13 +176,14 @@
 
       <h3>How to read a result</h3>
       <ul class="plain">
-        <li>The coloured band is a rough grouping, not a diagnosis.</li>
-        <li>The bars show how much each of your answers moved the score up or down compared with an
-          average person in the training data.</li>
-        <li><strong>Clinical check:</strong> the score is relative to patients referred to four hospitals,
-          where disease rates ranged from about 36% to 93%. It is not your absolute chance of disease.</li>
-        <li><strong>Lifestyle check:</strong> the percentage describes survey respondents like you who
-          <em>reported ever having</em> heart disease or a heart attack. It does not predict your future risk.</li>
+        <li>Your answers are matched to a risk group: lower, moderate or higher.</li>
+        <li>For each group we show how many out of 100 people in our data actually had (or reported)
+          heart disease. These rates were measured on people the model was not trained on.</li>
+        <li>The list of reasons shows which answers raised or lowered your result, and how strongly.</li>
+        <li><strong>Clinical check:</strong> based on patients referred for heart tests, so the rates are
+          much higher than in the general population.</li>
+        <li><strong>Lifestyle check:</strong> based on 2015 US survey answers; it describes who reported
+          heart disease, not who will develop it.</li>
       </ul>
 
       <h3>Limitations</h3>

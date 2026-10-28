@@ -79,6 +79,22 @@ class ModelB:
             return "lower"
         return "moderate" if score < high else "higher"
 
+    def group_stats(self, band):
+        """Observed rate in this band, measured on the holdout set."""
+        table = (self.metrics.get("candidate_bands") or {}).get("table") or []
+        for row in table:
+            if row.get("band") == band and row.get("n"):
+                return {
+                    "observed_rate": float(row["observed_rate"]),
+                    "n": int(row["n"]),
+                    "basis": "survey respondents whose answers looked like yours",
+                    "outcome": "reported ever having heart disease or a heart attack",
+                    "basis_note": (
+                        "US adults surveyed in 2015. This describes who reported heart "
+                        "disease, not who will develop it."),
+                }
+        return None
+
     def contributions(self, frame, inp):
         x_t = self.pipeline.named_steps["prep"].transform(frame)
         values = np.asarray(self.explainer.shap_values(x_t))[0]
@@ -94,13 +110,15 @@ class ModelB:
     def predict(self, inp: LifestyleInput):
         frame = self.to_frame(inp)
         score = float(self.model.predict_proba(frame)[0, 1])
+        band = self.band(score)
         return {
-            "risk_band": self.band(score),
+            "risk_band": band,
             "risk_score": round(score, 3),
             "bmi": inp.bmi,
             "contributions": self.contributions(frame, inp),
             "model_version": config.MODEL_B_VERSION,
             "disclaimer": config.DISCLAIMER_B,
+            "group_stats": self.group_stats(band),
         }
 
 

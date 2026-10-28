@@ -1,0 +1,487 @@
+{
+ "uci": {
+  "n": 920,
+  "disease_rate": 0.553,
+  "hospitals": [
+   {
+    "hospital": "cleveland",
+    "patients": 303,
+    "disease_rate": 0.459
+   },
+   {
+    "hospital": "hungarian",
+    "patients": 294,
+    "disease_rate": 0.361
+   },
+   {
+    "hospital": "switzerland",
+    "patients": 123,
+    "disease_rate": 0.935
+   },
+   {
+    "hospital": "va",
+    "patients": 200,
+    "disease_rate": 0.745
+   }
+  ],
+  "by_age": [
+   {
+    "group": "20s",
+    "n": 4,
+    "rate": 0.0
+   },
+   {
+    "group": "30s",
+    "n": 76,
+    "rate": 0.342
+   },
+   {
+    "group": "40s",
+    "n": 212,
+    "rate": 0.401
+   },
+   {
+    "group": "50s",
+    "n": 375,
+    "rate": 0.568
+   },
+   {
+    "group": "60s",
+    "n": 222,
+    "rate": 0.734
+   },
+   {
+    "group": "70s",
+    "n": 31,
+    "rate": 0.71
+   }
+  ],
+  "missing": [
+   {
+    "feature": "trestbps",
+    "missing_share": 0.065
+   },
+   {
+    "feature": "chol",
+    "missing_share": 0.22
+   },
+   {
+    "feature": "fbs",
+    "missing_share": 0.098
+   },
+   {
+    "feature": "restecg",
+    "missing_share": 0.002
+   },
+   {
+    "feature": "thalach",
+    "missing_share": 0.06
+   },
+   {
+    "feature": "exang",
+    "missing_share": 0.06
+   },
+   {
+    "feature": "oldpeak",
+    "missing_share": 0.067
+   },
+   {
+    "feature": "slope",
+    "missing_share": 0.336
+   },
+   {
+    "feature": "ca",
+    "missing_share": 0.664
+   },
+   {
+    "feature": "thal",
+    "missing_share": 0.528
+   }
+  ]
+ },
+ "brfss": {
+  "n": 229781,
+  "disease_rate": 0.103,
+  "by_age": [
+   {
+    "group": "18-24",
+    "n": 5512,
+    "rate": 0.005
+   },
+   {
+    "group": "25-29",
+    "n": 7068,
+    "rate": 0.008
+   },
+   {
+    "group": "30-34",
+    "n": 10025,
+    "rate": 0.013
+   },
+   {
+    "group": "35-39",
+    "n": 12234,
+    "rate": 0.016
+   },
+   {
+    "group": "40-44",
+    "n": 14050,
+    "rate": 0.025
+   },
+   {
+    "group": "45-49",
+    "n": 17299,
+    "rate": 0.041
+   },
+   {
+    "group": "50-54",
+    "n": 23140,
+    "rate": 0.062
+   },
+   {
+    "group": "55-59",
+    "n": 27301,
+    "rate": 0.082
+   },
+   {
+    "group": "60-64",
+    "n": 29736,
+    "rate": 0.113
+   },
+   {
+    "group": "65-69",
+    "n": 29168,
+    "rate": 0.142
+   },
+   {
+    "group": "70-74",
+    "n": 22041,
+    "rate": 0.177
+   },
+   {
+    "group": "75-79",
+    "n": 15394,
+    "rate": 0.2
+   },
+   {
+    "group": "80+",
+    "n": 16813,
+    "rate": 0.246
+   }
+  ]
+ },
+ "model_a_cv": [
+  {
+   "model": "logreg",
+   "auc": "0.902 +/- 0.024",
+   "accuracy": "0.827 +/- 0.028",
+   "brier": 0.122
+  },
+  {
+   "model": "random_forest",
+   "auc": "0.894 +/- 0.020",
+   "accuracy": "0.826 +/- 0.024",
+   "brier": 0.13
+  },
+  {
+   "model": "xgboost",
+   "auc": "0.891 +/- 0.022",
+   "accuracy": "0.822 +/- 0.017",
+   "brier": 0.128
+  }
+ ],
+ "model_a_loso": [
+  {
+   "model": "logreg",
+   "held_out": "cleveland",
+   "n_test": 303,
+   "disease_rate": 0.459,
+   "auc": 0.888,
+   "accuracy": 0.785,
+   "brier": 0.155
+  },
+  {
+   "model": "logreg",
+   "held_out": "hungarian",
+   "n_test": 294,
+   "disease_rate": 0.361,
+   "auc": 0.903,
+   "accuracy": 0.83,
+   "brier": 0.13
+  },
+  {
+   "model": "logreg",
+   "held_out": "switzerland",
+   "n_test": 123,
+   "disease_rate": 0.935,
+   "auc": 0.725,
+   "accuracy": 0.789,
+   "brier": 0.154
+  },
+  {
+   "model": "logreg",
+   "held_out": "va",
+   "n_test": 200,
+   "disease_rate": 0.745,
+   "auc": 0.715,
+   "accuracy": 0.73,
+   "brier": 0.181
+  },
+  {
+   "model": "random_forest",
+   "held_out": "cleveland",
+   "n_test": 303,
+   "disease_rate": 0.459,
+   "auc": 0.869,
+   "accuracy": 0.716,
+   "brier": 0.188
+  },
+  {
+   "model": "random_forest",
+   "held_out": "hungarian",
+   "n_test": 294,
+   "disease_rate": 0.361,
+   "auc": 0.881,
+   "accuracy": 0.765,
+   "brier": 0.176
+  },
+  {
+   "model": "random_forest",
+   "held_out": "switzerland",
+   "n_test": 123,
+   "disease_rate": 0.935,
+   "auc": 0.747,
+   "accuracy": 0.74,
+   "brier": 0.171
+  },
+  {
+   "model": "random_forest",
+   "held_out": "va",
+   "n_test": 200,
+   "disease_rate": 0.745,
+   "auc": 0.721,
+   "accuracy": 0.665,
+   "brier": 0.198
+  },
+  {
+   "model": "xgboost",
+   "held_out": "cleveland",
+   "n_test": 303,
+   "disease_rate": 0.459,
+   "auc": 0.875,
+   "accuracy": 0.792,
+   "brier": 0.152
+  },
+  {
+   "model": "xgboost",
+   "held_out": "hungarian",
+   "n_test": 294,
+   "disease_rate": 0.361,
+   "auc": 0.872,
+   "accuracy": 0.772,
+   "brier": 0.154
+  },
+  {
+   "model": "xgboost",
+   "held_out": "switzerland",
+   "n_test": 123,
+   "disease_rate": 0.935,
+   "auc": 0.749,
+   "accuracy": 0.715,
+   "brier": 0.185
+  },
+  {
+   "model": "xgboost",
+   "held_out": "va",
+   "n_test": 200,
+   "disease_rate": 0.745,
+   "auc": 0.71,
+   "accuracy": 0.69,
+   "brier": 0.216
+  }
+ ],
+ "model_a_ablation": [
+  {
+   "features": "full13",
+   "flags": "on",
+   "model": "logreg",
+   "cv_auc": 0.902,
+   "auc_cleveland": 0.888,
+   "auc_hungarian": 0.903,
+   "auc_switzerland": 0.725,
+   "auc_va": 0.715,
+   "loso_mean": 0.808
+  },
+  {
+   "features": "full13",
+   "flags": "on",
+   "model": "xgboost",
+   "cv_auc": 0.891,
+   "auc_cleveland": 0.875,
+   "auc_hungarian": 0.872,
+   "auc_switzerland": 0.749,
+   "auc_va": 0.71,
+   "loso_mean": 0.801
+  },
+  {
+   "features": "full13",
+   "flags": "off",
+   "model": "logreg",
+   "cv_auc": 0.883,
+   "auc_cleveland": 0.849,
+   "auc_hungarian": 0.894,
+   "auc_switzerland": 0.747,
+   "auc_va": 0.724,
+   "loso_mean": 0.803
+  },
+  {
+   "features": "full13",
+   "flags": "off",
+   "model": "xgboost",
+   "cv_auc": 0.886,
+   "auc_cleveland": 0.843,
+   "auc_hungarian": 0.858,
+   "auc_switzerland": 0.768,
+   "auc_va": 0.698,
+   "loso_mean": 0.792
+  },
+  {
+   "features": "no_ca_thal",
+   "flags": "on",
+   "model": "logreg",
+   "cv_auc": 0.893,
+   "auc_cleveland": 0.864,
+   "auc_hungarian": 0.892,
+   "auc_switzerland": 0.758,
+   "auc_va": 0.697,
+   "loso_mean": 0.803
+  },
+  {
+   "features": "no_ca_thal",
+   "flags": "on",
+   "model": "xgboost",
+   "cv_auc": 0.884,
+   "auc_cleveland": 0.869,
+   "auc_hungarian": 0.865,
+   "auc_switzerland": 0.746,
+   "auc_va": 0.706,
+   "loso_mean": 0.796
+  },
+  {
+   "features": "no_ca_thal",
+   "flags": "off",
+   "model": "logreg",
+   "cv_auc": 0.877,
+   "auc_cleveland": 0.857,
+   "auc_hungarian": 0.893,
+   "auc_switzerland": 0.746,
+   "auc_va": 0.748,
+   "loso_mean": 0.811
+  },
+  {
+   "features": "no_ca_thal",
+   "flags": "off",
+   "model": "xgboost",
+   "cv_auc": 0.875,
+   "auc_cleveland": 0.855,
+   "auc_hungarian": 0.866,
+   "auc_switzerland": 0.75,
+   "auc_va": 0.71,
+   "loso_mean": 0.795
+  },
+  {
+   "features": "checkup7",
+   "flags": "on",
+   "model": "logreg",
+   "cv_auc": 0.881,
+   "auc_cleveland": 0.836,
+   "auc_hungarian": 0.873,
+   "auc_switzerland": 0.783,
+   "auc_va": 0.756,
+   "loso_mean": 0.812
+  },
+  {
+   "features": "checkup7",
+   "flags": "on",
+   "model": "xgboost",
+   "cv_auc": 0.876,
+   "auc_cleveland": 0.823,
+   "auc_hungarian": 0.858,
+   "auc_switzerland": 0.8,
+   "auc_va": 0.739,
+   "loso_mean": 0.805
+  },
+  {
+   "features": "checkup7",
+   "flags": "off",
+   "model": "logreg",
+   "cv_auc": 0.866,
+   "auc_cleveland": 0.842,
+   "auc_hungarian": 0.882,
+   "auc_switzerland": 0.785,
+   "auc_va": 0.75,
+   "loso_mean": 0.815
+  },
+  {
+   "features": "checkup7",
+   "flags": "off",
+   "model": "xgboost",
+   "cv_auc": 0.872,
+   "auc_cleveland": 0.819,
+   "auc_hungarian": 0.861,
+   "auc_switzerland": 0.791,
+   "auc_va": 0.738,
+   "loso_mean": 0.802
+  }
+ ],
+ "model_b_baseline": [
+  {
+   "features": "all21",
+   "n_features": 21,
+   "model": "logreg",
+   "auc": "0.835 +/- 0.003",
+   "avg_precision": "0.373 +/- 0.006",
+   "brier": 0.0769
+  },
+  {
+   "features": "all21",
+   "n_features": 21,
+   "model": "xgboost",
+   "auc": "0.839 +/- 0.002",
+   "avg_precision": "0.380 +/- 0.007",
+   "brier": 0.0763
+  },
+  {
+   "features": "no_consequence16",
+   "n_features": 16,
+   "model": "logreg",
+   "auc": "0.806 +/- 0.003",
+   "avg_precision": "0.301 +/- 0.007",
+   "brier": 0.0812
+  },
+  {
+   "features": "no_consequence16",
+   "n_features": 16,
+   "model": "xgboost",
+   "auc": "0.810 +/- 0.003",
+   "avg_precision": "0.305 +/- 0.008",
+   "brier": 0.0807
+  },
+  {
+   "features": "lifestyle11",
+   "n_features": 11,
+   "model": "logreg",
+   "auc": "0.797 +/- 0.004",
+   "avg_precision": "0.290 +/- 0.008",
+   "brier": 0.0819
+  },
+  {
+   "features": "lifestyle11",
+   "n_features": 11,
+   "model": "xgboost",
+   "auc": "0.801 +/- 0.004",
+   "avg_precision": "0.293 +/- 0.009",
+   "brier": 0.0815
+  }
+ ]
+}

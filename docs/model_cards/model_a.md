@@ -33,6 +33,14 @@ Leave-one-hospital-out (train on three hospitals, test on the fourth):
 | switzerland | 123 | 0.935 | 0.652 | 0.783 | 0.159 |
 | va | 200 | 0.745 | 0.707 | 0.752 | 0.164 |
 
+Result groups (cut-offs [0.35, 0.65]), measured on held-out hospitals:
+
+| Result group | People | Actual disease rate | Share of people |
+| --- | --- | --- | --- |
+| lower | 253 | 0.162 | 0.275 |
+| moderate | 218 | 0.486 | 0.237 |
+| higher | 449 | 0.806 | 0.488 |
+
 ## Known limitations
 - Small (under 1,000 patients), from the 1980s, from referred patients at four hospitals.
 - Disease rates differ widely by hospital, so predicted scores are *relative to the
@@ -44,4 +52,4 @@ Leave-one-hospital-out (train on three hospitals, test on the fourth):
   are extrapolation.
 - The risk-band cut-offs are provisional.
 
-Generated at: 2026-10-21T07:06:25+00:00
+Generated at: 2026-10-24T07:37:29+00:00

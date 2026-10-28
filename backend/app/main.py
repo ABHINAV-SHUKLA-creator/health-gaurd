@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api.routes import predict_a, predict_b
+from app.api.routes import predict_a, predict_b, site
 from app.core import config
 
 app = FastAPI(title="HealthGuard API", version="1.0.0")
@@ -17,6 +17,7 @@ app.add_middleware(
 )
 app.include_router(predict_a.router)
 app.include_router(predict_b.router)
+app.include_router(site.router)
 
 
 @app.get("/health")

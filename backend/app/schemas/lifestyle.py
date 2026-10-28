@@ -3,7 +3,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, model_validator
 
-from app.schemas.clinical import Contribution
+from app.schemas.clinical import Contribution, GroupStats
 
 
 class LifestyleInput(BaseModel):
@@ -50,3 +50,4 @@ class LifestyleResult(BaseModel):
     contributions: list[Contribution]
     model_version: str
     disclaimer: str
+    group_stats: GroupStats | None = None

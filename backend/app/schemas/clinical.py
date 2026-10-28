@@ -34,6 +34,14 @@ class Contribution(BaseModel):
     direction: Literal["raises", "lowers"]
 
 
+class GroupStats(BaseModel):
+    observed_rate: float = Field(description="Share of people in this group with the outcome, 0-1")
+    n: int
+    basis: str
+    outcome: str
+    basis_note: str
+
+
 class ClinicalResult(BaseModel):
     risk_band: Literal["lower", "moderate", "higher"]
     risk_score: float = Field(description="Calibrated score 0-1, relative to training data")
@@ -41,3 +49,4 @@ class ClinicalResult(BaseModel):
     model_version: str
     disclaimer: str
     notes: list[str] = Field(default_factory=list, description="Cautions about this result")
+    group_stats: GroupStats | None = None

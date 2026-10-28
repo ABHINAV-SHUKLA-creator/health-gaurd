@@ -27,6 +27,10 @@ def card_a(m):
         ("brier_cal", "Brier"),
     ])
     pooled = m.get("held_out_pooled", {})
+    bands = md_table(m.get("bands", {}).get("table", []), [
+        ("band", "Result group"), ("n", "People"),
+        ("observed_rate", "Actual disease rate"), ("share_of_people", "Share of people"),
+    ])
     return f"""# Model card: Model A (Clinical check)
 
 ## Intended use
@@ -56,6 +60,10 @@ because it matched them on held-out hospitals and is simpler to explain.
 Leave-one-hospital-out (train on three hospitals, test on the fourth):
 
 {hospitals}
+
+Result groups (cut-offs {m.get("bands", {}).get("cutoffs")}), measured on held-out hospitals:
+
+{bands}
 
 ## Known limitations
 - Small (under 1,000 patients), from the 1980s, from referred patients at four hospitals.

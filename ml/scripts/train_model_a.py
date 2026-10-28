@@ -34,6 +34,7 @@ from healthguard_ml.features.preprocess import (  # noqa: E402
 
 FEATURES = FEATURE_SETS["checkup7"]
 C_GRID = [0.03, 0.1, 0.3, 1.0, 3.0]
+BAND_CUTOFFS = (0.35, 0.65)
 OUT = ROOT / "artifacts" / "model_a" / "v1"
 
 
@@ -90,6 +91,18 @@ def per_site_table(y, sites, raw, cal):
     return pd.DataFrame(rows)
 
 
+def band_table(y, p, cuts):
+    """Observed disease rate in each result group, on held-out hospitals."""
+    low, high = cuts
+    bands = pd.cut(p, [-0.01, low, high, 1.01], labels=["lower", "moderate", "higher"])
+    table = pd.DataFrame({"band": bands, "y": y.to_numpy()}).groupby(
+        "band", observed=False)["y"].agg(["size", "mean"])
+    table.columns = ["n", "observed_rate"]
+    table["share_of_people"] = (table["n"] / table["n"].sum()).round(3)
+    table["observed_rate"] = table["observed_rate"].round(3)
+    return table.reset_index()
+
+
 def plot_reliability(y, raw, cal, path):
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.plot([0, 1], [0, 1], "k--", label="perfect")
@@ -134,6 +147,9 @@ def main():
     print(f"\npooled held-out: {pooled}")
     print(f"pooled 5-fold CV AUC: {cv_auc.mean():.3f} +/- {cv_auc.std():.3f}")
     plot_reliability(y, raw, cal, OUT / "reliability.png")
+    bands = band_table(y, cal, BAND_CUTOFFS)
+    print(f"\nResult groups (cut-offs {BAND_CUTOFFS}), observed on held-out hospitals:")
+    print(bands.to_string(index=False))
 
     # final models, trained on all rows
     calibrated = CalibratedClassifierCV(make_pipeline(C), method="sigmoid", cv=5)
@@ -154,6 +170,7 @@ def main():
     joblib.dump({"pipeline": explain_pipe, "explainer": explainer,
                  "feature_names": list(X_t.columns)}, OUT / "explainer.joblib")
     table.to_csv(OUT / "per_hospital.csv", index=False)
+    bands.to_csv(OUT / "bands.csv", index=False)
     metrics = {
         "model": "logistic_regression_calibrated_sigmoid",
         "features": FEATURES,
@@ -163,6 +180,7 @@ def main():
         "pooled_cv_auc_std": round(float(cv_auc.std()), 3),
         "held_out_pooled": pooled,
         "per_hospital": table.to_dict(orient="records"),
+        "bands": {"cutoffs": list(BAND_CUTOFFS), "table": bands.to_dict(orient="records")},
         "trained_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     (OUT / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")

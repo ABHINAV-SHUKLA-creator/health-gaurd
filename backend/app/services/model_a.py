@@ -81,6 +81,22 @@ class ModelA:
         ]
         return sorted(items, key=lambda i: abs(i["effect"]), reverse=True)
 
+    def group_stats(self, band):
+        """Observed disease rate in this band, measured on held-out hospitals."""
+        table = (self.metrics.get("bands") or {}).get("table") or []
+        for row in table:
+            if row.get("band") == band and row.get("n"):
+                return {
+                    "observed_rate": float(row["observed_rate"]),
+                    "n": int(row["n"]),
+                    "basis": "patients in our hospital data whose answers looked like yours",
+                    "outcome": "had heart disease",
+                    "basis_note": (
+                        "These were patients referred for heart tests, so rates are "
+                        "much higher than in the general population."),
+                }
+        return None
+
     @staticmethod
     def notes(inp):
         notes = []
@@ -99,13 +115,15 @@ class ModelA:
     def predict(self, inp: ClinicalInput):
         frame = self.to_frame(inp)
         score = float(self.model.predict_proba(frame)[0, 1])
+        band = self.band(score)
         return {
-            "risk_band": self.band(score),
+            "risk_band": band,
             "risk_score": round(score, 3),
             "contributions": self.contributions(frame, inp),
             "model_version": config.MODEL_A_VERSION,
             "disclaimer": config.DISCLAIMER,
             "notes": self.notes(inp),
+            "group_stats": self.group_stats(band),
         }
 
 
